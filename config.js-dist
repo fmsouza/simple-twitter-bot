@@ -15,7 +15,7 @@ module.exports = {
             let bkeyword = this.blacklist[i];
             if(tweet.text.toLowerCase().indexOf(bkeyword.toLowerCase())>-1) return false;
         }
-        for(let j=0; i<this.keywords.length; j++) {
+        for(let j=0; j<this.keywords.length; j++) {
             let keyword = this.keywords[j];
             if(tweet.text.toLowerCase().indexOf(keyword.toLowerCase())>-1) return true;
         }
