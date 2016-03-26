@@ -8,10 +8,15 @@ module.exports = {
     access_token_secret:  '',
 
     keywords: [],
+    blacklist: [],
 
     valid: function (tweet) {
-        for(let i=0; i<this.keywords.length; i++) {
-            let keyword = this.keywords[i];
+        for(let i=0; i<this.blacklist.length; i++) {
+            let bkeyword = this.blacklist[i];
+            if(tweet.text.toLowerCase().indexOf(bkeyword.toLowerCase())>-1) return false;
+        }
+        for(let j=0; i<this.keywords.length; j++) {
+            let keyword = this.keywords[j];
             if(tweet.text.toLowerCase().indexOf(keyword.toLowerCase())>-1) return true;
         }
         return false;
