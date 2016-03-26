@@ -20,6 +20,6 @@ module.exports = {
     respond: function (tweet) {
         let response = `RT @${tweet.user.screen_name}: ${tweet.text}`;
         if(response.length>140) response = response.substring(0,137)+'...';
-        return tweet.text;
+        return response;
     }
 };
