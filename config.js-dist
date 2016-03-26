@@ -1,5 +1,6 @@
+'use strict';
 module.exports = {
-    debug: false,
+    debug: false, 
 
     consumer_key:         '',
     consumer_secret:      '',
@@ -9,10 +10,16 @@ module.exports = {
     keywords: [],
 
     valid: function (tweet) {
-        return true;
+        for(let i=0; i<this.keywords.length; i++) {
+            let keyword = this.keywords[i];
+            if(tweet.text.indexOf(keyword)>-1) return true;
+        }
+        return false;
     },
 
     respond: function (tweet) {
-        return 'my response goes here';
+        let response = `RT @${tweet.user.screen_name}: ${tweet.text}`;
+        if(response.length>140) response = response.substring(0,137)+'...';
+        return tweet.text;
     }
 };
