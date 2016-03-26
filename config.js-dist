@@ -12,7 +12,7 @@ module.exports = {
     valid: function (tweet) {
         for(let i=0; i<this.keywords.length; i++) {
             let keyword = this.keywords[i];
-            if(tweet.text.indexOf(keyword)>-1) return true;
+            if(tweet.text.toLowerCase().indexOf(keyword.toLowerCase())>-1) return true;
         }
         return false;
     },
