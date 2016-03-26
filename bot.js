@@ -12,7 +12,8 @@ var T = new Twit({
     access_token_secret: Config.access_token_secret
 });
 
-var stream = T.stream('statuses/filter', { track: Config.keywords });
+var stream = T.stream('user', { with:'followings' } );
+
 stream.on('tweet', function (tweet) {
     if (Config.valid(tweet)) {
         var response = Config.respond(tweet);
