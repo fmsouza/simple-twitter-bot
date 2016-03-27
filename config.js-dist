@@ -9,22 +9,27 @@ module.exports = {
 
     keywords: [],
     blacklist: [],
+    autoRT: [],
+    notRT: [],
 
     valid: function (tweet) {
-        for(let i=0; i<this.blacklist.length; i++) {
-            let bkeyword = this.blacklist[i];
-            if(tweet.text.toLowerCase().indexOf(bkeyword.toLowerCase())>-1) return false;
+        if(this.notRT.indexOf(tweet.user.screen_name.toLowerCase())>-1) return false;
+        if(this.autoRT.indexOf(tweet.user.screen_name.toLowerCase())>-1) return true;
+        let i;
+        for(i=0; i<this.blacklist.length; i++) {
+            let tmp = this.blacklist[i];
+            if(tweet.text.toLowerCase().indexOf(tmp.toLowerCase())>-1) return false;
         }
-        for(let j=0; j<this.keywords.length; j++) {
-            let keyword = this.keywords[j];
-            if(tweet.text.toLowerCase().indexOf(keyword.toLowerCase())>-1) return true;
+        for(i=0; i<this.keywords.length; i++) {
+            let tmp = this.keywords[i];
+            if(tweet.text.toLowerCase().indexOf(tmp.toLowerCase())>-1) return true;
         }
         return false;
     },
 
     respond: function (tweet) {
         let response = `RT @${tweet.user.screen_name}: ${tweet.text}`;
-        if(response.length>140) response = response.substring(0,137)+'...';
+        if(response.length>140) response = `${response.substring(0,137)}...`;
         return response;
     }
 };
